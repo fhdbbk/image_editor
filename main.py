@@ -1,13 +1,16 @@
 import sys
-from PyQt5 import QtWidgets, QtGui, QtCore
+# from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtWidgets import QWidget, QApplication, QGridLayout, QMenuBar, QMainWindow
+from PyQt5.QtGui import QIcon
 
-class MainWindow(QtWidgets.QWidget):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        layout = QtWidgets.QGridLayout()
-        self.setLayout(layout)
+        container = QWidget()
+        layout = QGridLayout()
+        container.setLayout(layout)
 
-        menubar = QtWidgets.QMenuBar()
+        menubar = QMenuBar()
         layout.addWidget(menubar, 0, 0)
 
         actionFile = menubar.addMenu("File")
@@ -18,13 +21,16 @@ class MainWindow(QtWidgets.QWidget):
 
         menubar.addMenu("Help")
 
+        self.setCentralWidget(container)
+
         self.resize(500, 500)
         self.move(100, 100)
         self.setWindowTitle('Editor')
-        self.setWindowIcon(QtGui.QIcon('images/icon.png'))
+        self.setWindowIcon(QIcon('images/icon.png'))
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    sys.exit(app.exec_())
+    app.exec()
+    # sys.exit(app.exec_())
